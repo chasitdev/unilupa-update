@@ -1,39 +1,33 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import Navigation from 'src/navigation/Navigation';
+import { AuthProvider } from 'src/hooks/auth/AuthProvider';
+import React from 'react';
+import { Dimensions, LogBox, StyleSheet } from 'react-native';
+import ErrorBoundary from 'react-native-error-boundary';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { LanguageProvider } from './src/hooks/language/LanguageProvider';
+import { UniversityProvider } from 'src/hooks/university/UniversityProvider';
+LogBox.ignoreAllLogs();
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+const { width, height } = Dimensions.get('window');
+export const aspect = height / width;
+export const appHeight = height;
+export const appWidth = width;
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
+export default function App() {
+  // const [role] = useState(Role.CLIENT);r
 
   return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-      <Text>hello word</Text>
-    </View>
+    <LanguageProvider>
+      <ErrorBoundary>
+        <GestureHandlerRootView style={styles.container}>
+          <AuthProvider>
+            <UniversityProvider>
+              <Navigation />
+            </UniversityProvider>
+          </AuthProvider>
+        </GestureHandlerRootView>
+      </ErrorBoundary>
+    </LanguageProvider>
   );
 }
 
@@ -42,5 +36,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default App;

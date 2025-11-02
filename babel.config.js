@@ -11,7 +11,7 @@ module.exports = {
     ],
 
     [
-      // 'module-resolver',
+       'module-resolver',
       {
         root: ['./src'],
         alias: {

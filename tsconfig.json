@@ -12,7 +12,14 @@
     "index.js"
   ],
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "types": [
+      "react",
+      "react-native"
+    ],
+    "lib": [
+      "esnext"
+    ],
     "baseUrl": ".",
     "skipLibCheck": true,
     "paths": {
